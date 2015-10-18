@@ -1,4 +1,4 @@
-package de.andrena.navitreffen.doubles.stufe1;
+package de.andrena.navitreffen.doubles.stufe2;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -8,6 +8,15 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class DoublesTest {
+
+	@Test
+	public void binaerPaschIstZweiPunkteWert() {
+		int score = new Doubles().threw(1, 2);
+		assertThat(score, is(2));
+
+		score = new Doubles().threw(2, 1);
+		assertThat(score, is(2));
+	}
 
 	@Test
 	public void keinePunkteBeiVerschiedenenAugenzahlen() {
@@ -21,26 +30,38 @@ public class DoublesTest {
 	}
 
 	@Test
-	public void testPaschsMitPunkteZaehlen() throws Exception {
+	public void paschsSindEinenPunktWert() throws Exception {
+		int score = new Doubles().threw(1, 1);
+		assertThat(score, is(1));
+
+		score = new Doubles().threw(2, 2);
+		assertThat(score, is(1));
+
+		score = new Doubles().threw(3, 3);
+		assertThat(score, is(1));
+
+		score = new Doubles().threw(4, 4);
+		assertThat(score, is(1));
+
+		score = new Doubles().threw(5, 5);
+		assertThat(score, is(1));
+
+		score = new Doubles().threw(6, 6);
+		assertThat(score, is(1));
+	}
+
+	@Test
+	public void doublesZaehltPunkte() {
 		Doubles doubles = new Doubles();
 
 		int score = doubles.threw(1, 1);
 		assertThat(score, is(1));
 
+		score = doubles.threw(1, 6);
+		assertThat(score, is(1));
+
 		score = doubles.threw(2, 2);
 		assertThat(score, is(2));
-
-		score = doubles.threw(3, 3);
-		assertThat(score, is(3));
-
-		score = doubles.threw(4, 4);
-		assertThat(score, is(4));
-
-		score = doubles.threw(5, 5);
-		assertThat(score, is(5));
-
-		score = doubles.threw(6, 6);
-		assertThat(score, is(6));
 	}
 
 	@Rule
@@ -65,4 +86,5 @@ public class DoublesTest {
 
 		doubles.threw(6, 7);
 	}
+
 }
