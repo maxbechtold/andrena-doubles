@@ -13,7 +13,7 @@ public class Doubles {
 		checkAugenzahlen(dice1, dice2);
 
 		int points = bestimmePunktzahl(dice1, dice2);
-		berechneErgebnis(dice1, dice2, points);
+		berechneUndSpeichereErgebnis(dice1, dice2, points);
 		return score;
 	}
 
@@ -43,7 +43,7 @@ public class Doubles {
 		return dice1 == 1 && dice2 == 2;
 	}
 
-	private void berechneErgebnis(int dice1, int dice2, int points) {
+	private void berechneUndSpeichereErgebnis(int dice1, int dice2, int points) {
 		lastDice1 = dice1;
 		lastDice2 = dice2;
 		score += points;

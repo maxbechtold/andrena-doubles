@@ -1,9 +1,6 @@
-package de.andrena.navitreffen.doubles.stufe4;
+package de.andrena.navitreffen.doubles.stufe5;
 
-import static java.lang.Boolean.FALSE;
-import static java.lang.Boolean.TRUE;
-
-import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Doubles {
@@ -14,8 +11,7 @@ public class Doubles {
 	private int score = 0;
 	private int lastDice1;
 	private int lastDice2;
-
-	private List<Boolean> geworfenePaschs = Arrays.asList(FALSE, FALSE, FALSE, FALSE, FALSE, FALSE);
+	private List<Integer> aufsteigendePaschs = new LinkedList<>();
 
 	public int threw(int dice1, int dice2) {
 		checkAugenzahlen(dice1, dice2);
@@ -44,12 +40,17 @@ public class Doubles {
 	}
 
 	private void speicherePasch(int paschZahl) {
-		int index = paschZahl - 1;
-		geworfenePaschs.set(index, TRUE);
+		if (isNaechsterFehlenderPasch(paschZahl)) {
+			aufsteigendePaschs.add(Integer.valueOf(paschZahl));
+		}
+	}
+
+	private boolean isNaechsterFehlenderPasch(int paschZahl) {
+		return aufsteigendePaschs.size() == paschZahl - 1;
 	}
 
 	private boolean isLetzterFehlenderPasch() {
-		return !geworfenePaschs.contains(FALSE);
+		return aufsteigendePaschs.stream().mapToInt((i -> i)).sum() == 21;
 	}
 
 	private boolean isDoppelPasch(int dice1, int dice2) {

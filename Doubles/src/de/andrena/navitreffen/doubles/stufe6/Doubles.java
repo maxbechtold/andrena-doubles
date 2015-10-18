@@ -1,9 +1,10 @@
-package de.andrena.navitreffen.doubles.stufe4;
+package de.andrena.navitreffen.doubles.stufe6;
 
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Doubles {
@@ -16,6 +17,9 @@ public class Doubles {
 	private int lastDice2;
 
 	private List<Boolean> geworfenePaschs = Arrays.asList(FALSE, FALSE, FALSE, FALSE, FALSE, FALSE);
+	private List<Integer> aufsteigendePaschs = new LinkedList<>();
+
+	private boolean binaerPaschGeworfen = false;
 
 	public int threw(int dice1, int dice2) {
 		checkAugenzahlen(dice1, dice2);
@@ -28,14 +32,10 @@ public class Doubles {
 	private int bestimmePunktzahl(int dice1, int dice2) {
 		int points = 0;
 		if (isPasch(dice1, dice2)) {
-			points = 1;
-			speicherePasch(dice1);
-			if (isLetzterFehlenderPasch()) {
-				points = score;
-			}
+			points = bewertePasch(dice1);
 		}
 		if (isBinaerPasch(dice1, dice2) || isBinaerPasch(dice2, dice1)) {
-			points = 2;
+			points = bewerteBinaerPasch();
 		}
 		if (isDoppelPasch(dice1, dice2) || isDoppelPasch(dice2, dice1)) {
 			points *= 2;
@@ -43,13 +43,45 @@ public class Doubles {
 		return points;
 	}
 
+	private int bewertePasch(int paschZahl) {
+		speicherePasch(paschZahl);
+		int points = 1;
+		if (isLetzterFehlenderPasch()) {
+			points = score;
+		}
+		return points;
+	}
+
+	private int bewerteBinaerPasch() {
+		int points = 2;
+		if (!binaerPaschGeworfen && allePaschsGeworfen()) {
+			points = score;
+		}
+		binaerPaschGeworfen = true;
+		return points;
+	}
+
+	private boolean allePaschsGeworfen() {
+		return anzahlFehlenderPaschs() == 0;
+	}
+
+	private long anzahlFehlenderPaschs() {
+		return geworfenePaschs.stream().filter(b -> !b).count();
+	}
+
 	private void speicherePasch(int paschZahl) {
-		int index = paschZahl - 1;
-		geworfenePaschs.set(index, TRUE);
+		geworfenePaschs.set(paschZahl - 1, TRUE);
+		if (isNaechsterFehlenderPasch(paschZahl)) {
+			aufsteigendePaschs.add(Integer.valueOf(paschZahl));
+		}
+	}
+
+	private boolean isNaechsterFehlenderPasch(int paschZahl) {
+		return aufsteigendePaschs.size() == paschZahl - 1;
 	}
 
 	private boolean isLetzterFehlenderPasch() {
-		return !geworfenePaschs.contains(FALSE);
+		return aufsteigendePaschs.stream().mapToInt((i -> i)).sum() == 21;
 	}
 
 	private boolean isDoppelPasch(int dice1, int dice2) {
