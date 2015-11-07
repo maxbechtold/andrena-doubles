@@ -1,9 +1,5 @@
-package de.andrena.navitreffen.doubles.stufe6;
+package de.andrena.navitreffen.doubles.beispielloesung.stufe5;
 
-import static java.lang.Boolean.FALSE;
-import static java.lang.Boolean.TRUE;
-
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,11 +11,7 @@ public class Doubles {
 	private int score = 0;
 	private int lastDice1;
 	private int lastDice2;
-
-	private List<Boolean> geworfenePaschs = Arrays.asList(FALSE, FALSE, FALSE, FALSE, FALSE, FALSE);
 	private List<Integer> aufsteigendePaschs = new LinkedList<>();
-
-	private boolean binaerPaschGeworfen = false;
 
 	public int threw(int dice1, int dice2) {
 		checkAugenzahlen(dice1, dice2);
@@ -32,10 +24,14 @@ public class Doubles {
 	private int bestimmePunktzahl(int dice1, int dice2) {
 		int points = 0;
 		if (isPasch(dice1, dice2)) {
-			points = bewertePasch(dice1);
+			points = 1;
+			speicherePasch(dice1);
+			if (isLetzterFehlenderPasch()) {
+				points = score;
+			}
 		}
 		if (isBinaerPasch(dice1, dice2) || isBinaerPasch(dice2, dice1)) {
-			points = bewerteBinaerPasch();
+			points = 2;
 		}
 		if (isDoppelPasch(dice1, dice2) || isDoppelPasch(dice2, dice1)) {
 			points *= 2;
@@ -43,34 +39,7 @@ public class Doubles {
 		return points;
 	}
 
-	private int bewertePasch(int paschZahl) {
-		speicherePasch(paschZahl);
-		int points = 1;
-		if (isLetzterFehlenderPasch()) {
-			points = score;
-		}
-		return points;
-	}
-
-	private int bewerteBinaerPasch() {
-		int points = 2;
-		if (!binaerPaschGeworfen && allePaschsGeworfen()) {
-			points = score;
-		}
-		binaerPaschGeworfen = true;
-		return points;
-	}
-
-	private boolean allePaschsGeworfen() {
-		return anzahlFehlenderPaschs() == 0;
-	}
-
-	private long anzahlFehlenderPaschs() {
-		return geworfenePaschs.stream().filter(b -> !b).count();
-	}
-
 	private void speicherePasch(int paschZahl) {
-		geworfenePaschs.set(paschZahl - 1, TRUE);
 		if (isNaechsterFehlenderPasch(paschZahl)) {
 			aufsteigendePaschs.add(Integer.valueOf(paschZahl));
 		}

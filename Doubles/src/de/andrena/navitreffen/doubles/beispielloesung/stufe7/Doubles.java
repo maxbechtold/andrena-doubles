@@ -1,4 +1,4 @@
-package de.andrena.navitreffen.doubles.stufe7;
+package de.andrena.navitreffen.doubles.beispielloesung.stufe7;
 
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;

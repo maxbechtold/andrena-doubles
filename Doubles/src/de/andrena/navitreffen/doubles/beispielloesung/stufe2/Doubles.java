@@ -1,4 +1,4 @@
-package de.andrena.navitreffen.doubles.stufe1;
+package de.andrena.navitreffen.doubles.beispielloesung.stufe2;
 
 public class Doubles {
 
@@ -9,10 +9,21 @@ public class Doubles {
 
 	public int threw(int dice1, int dice2) {
 		checkAugenzahlen(dice1, dice2);
-		if (dice1 == dice2) {
-			score++;
+		if (isPasch(dice1, dice2)) {
+			score += 1;
+		}
+		if (isBinaerPasch(dice1, dice2) || isBinaerPasch(dice2, dice1)) {
+			score += 2;
 		}
 		return score;
+	}
+
+	private boolean isPasch(int dice1, int dice2) {
+		return dice1 == dice2;
+	}
+
+	private boolean isBinaerPasch(int dice1, int dice2) {
+		return dice1 == 1 && dice2 == 2;
 	}
 
 	private void checkAugenzahlen(int dice1, int dice2) {

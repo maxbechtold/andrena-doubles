@@ -7,6 +7,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import de.andrena.navitreffen.doubles.beispielloesung.stufe4.Doubles;
+
 public class DoublesTest {
 
 	@Test

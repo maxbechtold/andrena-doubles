@@ -1,10 +1,4 @@
-package de.andrena.navitreffen.doubles.stufe4;
-
-import static java.lang.Boolean.FALSE;
-import static java.lang.Boolean.TRUE;
-
-import java.util.Arrays;
-import java.util.List;
+package de.andrena.navitreffen.doubles.beispielloesung.stufe3;
 
 public class Doubles {
 
@@ -14,8 +8,6 @@ public class Doubles {
 	private int score = 0;
 	private int lastDice1;
 	private int lastDice2;
-
-	private List<Boolean> geworfenePaschs = Arrays.asList(FALSE, FALSE, FALSE, FALSE, FALSE, FALSE);
 
 	public int threw(int dice1, int dice2) {
 		checkAugenzahlen(dice1, dice2);
@@ -29,10 +21,6 @@ public class Doubles {
 		int points = 0;
 		if (isPasch(dice1, dice2)) {
 			points = 1;
-			speicherePasch(dice1);
-			if (isLetzterFehlenderPasch()) {
-				points = score;
-			}
 		}
 		if (isBinaerPasch(dice1, dice2) || isBinaerPasch(dice2, dice1)) {
 			points = 2;
@@ -41,15 +29,6 @@ public class Doubles {
 			points *= 2;
 		}
 		return points;
-	}
-
-	private void speicherePasch(int paschZahl) {
-		int index = paschZahl - 1;
-		geworfenePaschs.set(index, TRUE);
-	}
-
-	private boolean isLetzterFehlenderPasch() {
-		return !geworfenePaschs.contains(FALSE);
 	}
 
 	private boolean isDoppelPasch(int dice1, int dice2) {
@@ -80,4 +59,5 @@ public class Doubles {
 			throw new IllegalArgumentException(String.format(fehler, MIN_AUGENZAHL, MAX_AUGENZAHL));
 		}
 	}
+
 }
