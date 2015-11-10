@@ -15,10 +15,10 @@ public class DoublesTest {
 	public void doppelterPaschGibtDoppeltePunktzahl() {
 		Doubles doubles = new Doubles();
 
-		int score = doubles.threw(3, 3);
+		int score = doubles.calculateScore(3, 3);
 		assertThat(score, is(1));
 
-		score = doubles.threw(3, 3);
+		score = doubles.calculateScore(3, 3);
 		assertThat(score, is(3));
 	}
 
@@ -26,10 +26,10 @@ public class DoublesTest {
 	public void doppelterBinaerPaschGibtDoppeltePunktzahl() {
 		Doubles doubles = new Doubles();
 
-		int score = doubles.threw(1, 2);
+		int score = doubles.calculateScore(1, 2);
 		assertThat(score, is(2));
 
-		score = doubles.threw(2, 1);
+		score = doubles.calculateScore(2, 1);
 		assertThat(score, is(6));
 	}
 
@@ -37,22 +37,22 @@ public class DoublesTest {
 	public void doppelPaschNurBeiAufeinanderfolgendenWürfen() {
 		Doubles doubles = new Doubles();
 
-		int score = doubles.threw(2, 2);
+		int score = doubles.calculateScore(2, 2);
 		assertThat(score, is(1));
 
-		score = doubles.threw(2, 3);
+		score = doubles.calculateScore(2, 3);
 		assertThat(score, is(1));
 
-		score = doubles.threw(2, 2);
+		score = doubles.calculateScore(2, 2);
 		assertThat(score, is(2));
 	}
 
 	@Test
 	public void binaerPaschIstZweiPunkteWert() {
-		int score = new Doubles().threw(1, 2);
+		int score = new Doubles().calculateScore(1, 2);
 		assertThat(score, is(2));
 
-		score = new Doubles().threw(2, 1);
+		score = new Doubles().calculateScore(2, 1);
 		assertThat(score, is(2));
 	}
 
@@ -60,31 +60,31 @@ public class DoublesTest {
 	public void keinePunkteBeiVerschiedenenAugenzahlen() {
 		Doubles doubles = new Doubles();
 
-		int score = doubles.threw(1, 6);
+		int score = doubles.calculateScore(1, 6);
 		assertThat(score, is(0));
 
-		score = doubles.threw(6, 1);
+		score = doubles.calculateScore(6, 1);
 		assertThat(score, is(0));
 	}
 
 	@Test
 	public void paschsSindEinenPunktWert() throws Exception {
-		int score = new Doubles().threw(1, 1);
+		int score = new Doubles().calculateScore(1, 1);
 		assertThat(score, is(1));
 
-		score = new Doubles().threw(2, 2);
+		score = new Doubles().calculateScore(2, 2);
 		assertThat(score, is(1));
 
-		score = new Doubles().threw(3, 3);
+		score = new Doubles().calculateScore(3, 3);
 		assertThat(score, is(1));
 
-		score = new Doubles().threw(4, 4);
+		score = new Doubles().calculateScore(4, 4);
 		assertThat(score, is(1));
 
-		score = new Doubles().threw(5, 5);
+		score = new Doubles().calculateScore(5, 5);
 		assertThat(score, is(1));
 
-		score = new Doubles().threw(6, 6);
+		score = new Doubles().calculateScore(6, 6);
 		assertThat(score, is(1));
 	}
 
@@ -92,13 +92,13 @@ public class DoublesTest {
 	public void doublesZaehltPunkte() {
 		Doubles doubles = new Doubles();
 
-		int score = doubles.threw(1, 1);
+		int score = doubles.calculateScore(1, 1);
 		assertThat(score, is(1));
 
-		score = doubles.threw(1, 6);
+		score = doubles.calculateScore(1, 6);
 		assertThat(score, is(1));
 
-		score = doubles.threw(2, 2);
+		score = doubles.calculateScore(2, 2);
 		assertThat(score, is(2));
 	}
 
@@ -112,7 +112,7 @@ public class DoublesTest {
 		exception.expect(IllegalArgumentException.class);
 		exception.expectMessage("Ein Würfel hat nur Augenzahlen von 1 bis 6");
 
-		doubles.threw(0, 1);
+		doubles.calculateScore(0, 1);
 	}
 
 	@Test
@@ -122,7 +122,7 @@ public class DoublesTest {
 		exception.expect(IllegalArgumentException.class);
 		exception.expectMessage("Ein Würfel hat nur Augenzahlen von 1 bis 6");
 
-		doubles.threw(6, 7);
+		doubles.calculateScore(6, 7);
 	}
 
 }

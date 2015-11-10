@@ -7,6 +7,7 @@ Genaue Aufgabe: Doubles
 - Anforderungen liegen als Ausdruck vor und sollen nur nacheinander bearbeitet werden und NICHT schon vorab gelesen werden
 - erfordert Redesign/Refactoring, was den Einsatz von Shortcuts begünstigt
 - Wechsel im Pair z.B. nach jedem erfüllten Test
+- Eigene Lösung von Stufe 1 kann kopiert werden in package von Stufe 2 usw.
 - Beispiellösungen für alle Stufen im Verzeichnis src-sample
 - Tests sind alle grün, daher als Erstes import der Beispielimplementierung löschen (Tipp: Ctrl+[+] klappt imports aus)
 - bei Fragen an Max oder Kristin wenden

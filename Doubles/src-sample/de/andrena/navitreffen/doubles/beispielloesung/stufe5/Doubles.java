@@ -13,7 +13,7 @@ public class Doubles {
 	private int lastDice2;
 	private List<Integer> aufsteigendePaschs = new LinkedList<>();
 
-	public int threw(int dice1, int dice2) {
+	public int calculateScore(int dice1, int dice2) {
 		checkAugenzahlen(dice1, dice2);
 
 		int points = bestimmePunktzahl(dice1, dice2);

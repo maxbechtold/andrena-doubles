@@ -7,7 +7,7 @@ public class Doubles {
 
 	private int score = 0;
 
-	public int threw(int dice1, int dice2) {
+	public int calculateScore(int dice1, int dice2) {
 		checkAugenzahlen(dice1, dice2);
 		if (isPasch(dice1, dice2)) {
 			score += 1;
