@@ -41,7 +41,7 @@ public class DoublesTest {
 	}
 
 	@Test
-	public void ersterBinaerPaschNachAllenPaschsVerdoppeltPunkte() {
+	public void ersterBinaerPaschNachAllenPaschsVerdoppeltEinmaligPunkte() {
 		Doubles doubles = new Doubles();
 
 		int score = doubles.calculateScore(1, 1);
@@ -67,6 +67,35 @@ public class DoublesTest {
 
 		score = doubles.calculateScore(1, 2);
 		assertThat(score, is(16));
+	}
+
+	@Test
+	public void faelltBinaerPaschVorLetztemPaschGibtEsKeineDoppeltenPunkte() {
+		Doubles doubles = new Doubles();
+
+		int score = doubles.calculateScore(1, 1);
+		assertThat(score, is(1));
+
+		score = doubles.calculateScore(2, 2);
+		assertThat(score, is(2));
+
+		score = doubles.calculateScore(3, 3);
+		assertThat(score, is(3));
+
+		score = doubles.calculateScore(4, 4);
+		assertThat(score, is(4));
+
+		score = doubles.calculateScore(6, 6);
+		assertThat(score, is(5));
+
+		score = doubles.calculateScore(2, 1);
+		assertThat(score, is(7));
+
+		score = doubles.calculateScore(5, 5);
+		assertThat(score, is(8));
+
+		score = doubles.calculateScore(1, 2);
+		assertThat(score, is(10));
 	}
 
 	@Test
